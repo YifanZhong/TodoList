@@ -11,6 +11,7 @@ class TodoList extends Component {
         //console.log(this.state);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleStoreChange = this.handleStoreChange.bind(this);
+        this.handleBtnClick = this.handleBtnClick.bind(this);
         store.subscribe(this.handleStoreChange);
     }
 
@@ -23,7 +24,7 @@ class TodoList extends Component {
                     style = {{width: '300px', marginRight: '10px'}}
                     onChange = {this.handleInputChange}
                 />
-                <Button type="primary">submit</Button>
+                <Button type="primary" onClick = {this.handleBtnClick}>submit</Button>
                 <List
                     style = {{marginTop: '10px', width: '300px'}}
                     bordered
@@ -48,6 +49,13 @@ class TodoList extends Component {
 
     handleStoreChange(){
         this.setState(store.getState());
+    }
+
+    handleBtnClick(){
+        const action = {
+            type: 'add_todo_item'
+        };
+        store.dispatch(action);
     }
 }
 
